@@ -23,6 +23,7 @@ jobs:
     - name: Install Dependencies
       run: |
         pip install beautifulsoup4
+        pip install requests
 
     - name: Run Scraper
       run: python advisor.py
