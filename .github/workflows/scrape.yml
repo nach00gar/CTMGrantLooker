@@ -1,0 +1,33 @@
+name: Weekly Web Scraper
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Ejecuta cada domingo a medianoche UTC
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install Dependencies
+      run: |
+        pip install beautifulsoup4
+
+    - name: Run Scraper
+      run: python advisor.py
+
+    - name: Save Results to Repository
+      run: |
+        mkdir -p results  # Crea un directorio para almacenar los resultados
+        mv results.txt results/  # Mueve el archivo de resultados al directorio
+        git add results/results.txt
+        git commit -m "Actualizar resultados"
+        git push
