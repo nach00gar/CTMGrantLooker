@@ -2,7 +2,7 @@ name: Weekly Web Scraper
 
 on:
   schedule:
-    - cron: '0 0 * * 0'  # Ejecuta cada domingo a medianoche UTC
+    - cron: '22 18 4 12 *'  # Ejecuta cada domingo a medianoche UTC
 
 jobs:
   scrape:
