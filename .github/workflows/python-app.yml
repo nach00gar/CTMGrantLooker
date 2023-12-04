@@ -32,6 +32,9 @@ jobs:
       run: |
         mkdir -p results  # Crea un directorio para almacenar los resultados
         mv results.txt results/  # Mueve el archivo de resultados al directorio
+        git config --global user.email ${{ secrets.MAIL }}  # Configura el correo electrónico del usuario de Git
+        git config --global user.name "nach00gar"  # Configura el nombre del usuario de Git
+    
         git add results/results.txt
         git commit -m "Actualizar resultados"
         git push
