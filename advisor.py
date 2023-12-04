@@ -46,7 +46,6 @@ if __name__ == "__main__":
     for a in resultados:
         f.write(a)
         f.write("\n")
-        f.write("\n")
     f.close()
 
 
