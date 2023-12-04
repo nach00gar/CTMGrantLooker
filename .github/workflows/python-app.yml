@@ -31,7 +31,7 @@ jobs:
     - name: Save Results to Repository
       run: |
         mkdir -p results  # Crea un directorio para almacenar los resultados
-        mv resultados.txt results/  # Mueve el archivo de resultados al directorio
-        git add results/resultados.txt
+        mv results.txt results/  # Mueve el archivo de resultados al directorio
+        git add results/results.txt
         git commit -m "Actualizar resultados"
         git push
