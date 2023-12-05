@@ -39,7 +39,7 @@ jobs:
           subject: AVISO SEMANAL DE SUBVENCIONES
           to: ${{secrets.MAIL_CLUB}}
           from: Automatizado por GitHub
-          body: $(cat results/results.txt)
+          body: $(cat results.txt)
           ignore_cert: true  # Quité la coma después de "true"
 
       - name: Eliminar archivo results.txt del repositorio
