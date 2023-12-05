@@ -1,66 +1,46 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Python application
 
 on: push
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
-    - name: Install Dependencies
-      run: |
-        pip install beautifulsoup4
-        pip install requests
-
-    - name: Run Scraper
-      run: python advisor.py
-
-    - name: Save Results to Repository
-      run: |
-        mkdir -p results  # Crea un directorio para almacenar los resultados
-        mv results.txt results/  # Mueve el archivo de resultados al directorio
-        git config --global user.email ${{ secrets.MAIL }}  # Configura el correo electrónico del usuario de Git
-        git config --global user.name "nach00gar"  # Configura el nombre del usuario de Git
-    
-        git add results/results.txt
-        git commit -m "Actualizar resultados"
-        git push
-    - name: Obtener Contenido de Archivo
-      id: get-file-content
-      run: echo "::set-output name=content::$(cat results/results.txt)"
-
-    - name: Send mail
-  uses: dawidd6/action-send-mail@v3
-  with:
-    #  * smtp://user:password@server:port
-    #  * smtp+starttls://user:password@server:port
-    connection_url: smtp+starttls://${{secrets.MAIL_SENDER}}:${{secrets.MAIL_PASSWORD}}@smtp.gmail.com:465
-    # Required mail server address if not connection_url:
-    server_address: smtp.gmail.com
-    # Server port, default 25:
-    server_port: 465
-    # Optional whether this connection use TLS (default is true if server_port is 465)
-    secure: true
-    # Optional (recommended) mail server username:
-    username: ${{secrets.MAIL_SENDER}}
-    # Optional (recommended) mail server password:
-    password: ${{secrets.MAIL_PASSWORD}}
-    # Required mail subject:
-    subject: AVISO SEMANAL DE SUBVENCIONES
-    # Required recipients' addresses:
-    to: ${{secrets.MAIL_CLUB}}
-    # Required sender full name (address can be skipped):
-    from: Automatizado por GitHub
-    # Optional plain body:
-    body: ${{ steps.get-file-content.outputs.content }}
-    # Optional unsigned/invalid certificates allowance:
-    ignore_cert: true
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Install Dependencies
+        run: |
+          pip install beautifulsoup4
+          pip install requests
+      - name: Run Scraper
+        run: python advisor.py
+      - name: Save Results to Repository
+        run: |
+          mkdir -p results
+          mv results.txt results/
+          git config --global user.email ${{ secrets.MAIL }}
+          git config --global user.name "nach00gar"
+          git add results/results.txt
+          git commit -m "Actualizar resultados"
+          git push
+      - name: Obtener Contenido de Archivo
+        id: get-file-content
+        run: echo "::set-output name=content::$(cat results/results.txt)"
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          connection_url: smtp+starttls://${{secrets.MAIL_SENDER}}:${{secrets.MAIL_PASSWORD}}@smtp.gmail.com:465
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{secrets.MAIL_SENDER}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: AVISO SEMANAL DE SUBVENCIONES
+          to: ${{secrets.MAIL_CLUB}}
+          from: Automatizado por GitHub
+          body: ${{ steps.get-file-content.outputs.content }}
+          ignore_cert: true  # Quité la coma después de "true"
