@@ -29,7 +29,11 @@ jobs:
           git push
       - name: Obtener Contenido de Archivo
         id: get-file-content
-        run: echo "::set-output name=content::$(cat results/results.txt)"
+        run: |
+          content=$(cat results/results.txt)
+          lines=($content)
+          formatted_content=$(IFS=$'\n'; echo "${lines[*]}")
+          echo "::set-output name=content::$formatted_content"
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
         with:
