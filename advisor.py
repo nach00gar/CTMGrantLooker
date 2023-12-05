@@ -18,7 +18,7 @@ def consulta(url):
     titulo = soup.find(class_='views-field views-field-titulo-formal block')
     estado = soup.find(class_='views-field views-field-estado-plazo block')
     fecha = soup.find(class_='views-field views-field-fecha-actualizacion block')
-    return titulo.text + " " + estado.text + " " + fecha.text
+    return titulo.text + "  " + estado.text + " " + fecha.text
 
 
 # In[41]:
