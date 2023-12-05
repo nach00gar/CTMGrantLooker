@@ -41,6 +41,7 @@ jobs:
           from: Automatizado por GitHub
           body: $(cat results/results.txt)
           ignore_cert: true  # Quité la coma después de "true"
-    - name: Eliminar archivo results.txt del repositorio
-      run: rm results/results.txt
-      continue-on-error: true  # Para evitar que el flujo de trabajo falle si el archivo no existe
+
+      - name: Eliminar archivo results.txt del repositorio
+        run: rm results/results.txt
+        continue-on-error: true
