@@ -27,9 +27,6 @@ jobs:
           git add results/results.txt
           git commit -m "Actualizar resultados"
           git push
-    - name: Obtener Contenido de Archivo
-      id: get-file-content
-      run: echo "::set-output name=content::$(cat results/results.txt)"
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
         with:
@@ -42,5 +39,8 @@ jobs:
           subject: AVISO SEMANAL DE SUBVENCIONES
           to: ${{secrets.MAIL_CLUB}}
           from: Automatizado por GitHub
-          body: ${{ steps.get-file-content.outputs.content }}
+          body: $(cat results/results.txt)
           ignore_cert: true  # Quité la coma después de "true"
+    - name: Eliminar archivo results.txt del repositorio
+      run: rm results/results.txt
+      continue-on-error: true  # Para evitar que el flujo de trabajo falle si el archivo no existe
