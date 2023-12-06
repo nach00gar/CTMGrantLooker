@@ -37,5 +37,5 @@ jobs:
           subject: AVISO SEMANAL DE SUBVENCIONES
           to: ${{secrets.MAIL_CLUB}}
           from: Automatizado por GitHub
-          body: ${{ steps.get-file-content.outputs.content }}
+          html_body: ${{ steps.get-file-content.outputs.content }}
           ignore_cert: true  # Quité la coma después de "true"
