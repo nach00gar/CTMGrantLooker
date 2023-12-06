@@ -42,11 +42,11 @@ if __name__ == "__main__":
     for a in resultado.find_all(class_='tdTitulo'):
         resultados.append(a.text)
     print(resultados)
-    f = open("results.txt", "a")
-    for a in resultados:
-        f.write(a)
-        f.write("\n")
-    f.close()
+    with open("results.txt", "a") as f:
+        # Agrega etiquetas HTML para formatear el contenido
+        f.write("<p>")
+        f.write(resultados.replace("\n", "<br>\n"))
+        f.write("</p>")
 
 
 # In[ ]:
