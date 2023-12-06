@@ -22,6 +22,9 @@ jobs:
         run: |
           mkdir -p results
           mv results.txt results/
+      - name: Obtener Contenido de Archivo
+        id: get-file-content
+        run: echo "::set-output name=content::$(cat results/results.txt)"
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
         with:
@@ -34,5 +37,5 @@ jobs:
           subject: AVISO SEMANAL DE SUBVENCIONES
           to: ${{secrets.MAIL_CLUB}}
           from: Automatizado por GitHub
-          body: $(cat results.txt)
+          body: ${{ steps.get-file-content.outputs.content }}
           ignore_cert: true  # Quité la coma después de "true"
