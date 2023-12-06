@@ -43,10 +43,10 @@ if __name__ == "__main__":
         resultados.append(a.text)
     print(resultados)
     with open("results.txt", "a") as f:
-        # Agrega etiquetas HTML para formatear el contenido
-        f.write("<p>")
-        f.write(resultados.replace("\n", "<br>\n"))
-        f.write("</p>")
+        for a in resultados:
+            f.write("<p>")
+            f.write(a.replace("\n", "<br>\n"))
+            f.write("</p>")
 
 
 # In[ ]:
