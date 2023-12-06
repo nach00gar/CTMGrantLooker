@@ -43,6 +43,7 @@ if __name__ == "__main__":
         resultados.append(a.text)
     print(resultados)
     with open("results.txt", "a") as f:
+        f.write('<head> <meta charset="UTF-8"> </head>')
         for a in resultados:
             f.write("<p>")
             f.write(a.replace("\n", "<br>\n"))
