@@ -1,16 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[51]:
-
-
 import requests
 from bs4 import BeautifulSoup
 from datetime import date
-
-
-# In[46]:
-
 
 def consulta(url):
     response = requests.get(url)
@@ -20,15 +10,7 @@ def consulta(url):
     fecha = soup.find(class_='views-field views-field-fecha-actualizacion block')
     return titulo.text + "  " + estado.text + " " + fecha.text
 
-
-# In[41]:
-
-
 junta = ["https://www.juntadeandalucia.es/servicios/sede/tramites/procedimientos/detalle/8701.html", "https://www.juntadeandalucia.es/servicios/sede/tramites/procedimientos/detalle/22597.html", "https://www.juntadeandalucia.es/servicios/sede/tramites/procedimientos/detalle/13755.html"]
-
-
-# In[57]:
-
 
 if __name__ == "__main__":
     resultados=[]
@@ -48,10 +30,4 @@ if __name__ == "__main__":
             f.write("<p>")
             f.write(a.replace("\n", "<br>\n"))
             f.write("</p>")
-
-
-# In[ ]:
-
-
-
-
+    
